@@ -15,24 +15,50 @@ class ProjectView extends Component {
     super(props);
     this.state = {
       loaded: false,
+      project:props.route.passProps.project,
     }
   }
-  render() {
-    // var property = this.props.property;
-    // var stats = property.bedroom_number + ' bed ' + property.property_type;
-    // if (property.bathroom_number) {
-    //   stats += ', ' + property.bathroom_number + ' ' + (property.bathroom_number > 1
-    //     ? 'bathrooms' : 'bathroom');
-    // }
 
-    // var price = property.price_formatted.split(' ')[0];
-
+  renderHeader() {
+    var projectStyle = {
+      backgroundColor: this.state.project.color,
+    }
     return (
-      <View>
+      <View style={[styles.headerContainer, projectStyle]}>
+        <Text style={[styles.header]}>{this.state.project.title}</Text>
+      </View>
+    )
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        {this.renderHeader()}
         <Text>Overview fam</Text>
       </View>
     );
   }
 };
+
+var styles = React.StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  headerContainer: {
+    backgroundColor:'#565868',
+    marginTop: 0,
+    paddingBottom: 0,
+  },
+
+  header: {
+    color:'#666',
+    fontFamily: 'Proxima Nova',
+    fontSize: 23,
+    fontWeight: '700',
+    alignSelf: 'center',
+    marginTop: 24,
+    marginBottom: 12,
+  },
+});
 
 module.exports = ProjectView;

@@ -56,7 +56,6 @@ class ProjectsOverview extends React.Component {
   rowPressed(id) {
     var project = this.state.projects
       .filter(prop => prop.id === id)[0];
-    console.log(project)
     this.props.navigator.push({
       title: project.title,
       component: ProjectView,

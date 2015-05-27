@@ -18,6 +18,8 @@
 		035ED89D1B106C7F00C17B7E /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 035ED89B1B106C7F00C17B7E /* ProximaNova-Bold.otf */; };
 		035ED89E1B106C7F00C17B7E /* ProximaNova-Reg.otf in Resources */ = {isa = PBXBuildFile; fileRef = 035ED89C1B106C7F00C17B7E /* ProximaNova-Reg.otf */; };
 		037FEDC11B11AFA100FFF653 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 037FEDC01B11AF6100FFF653 /* libReactNativeIcons.a */; };
+		03C9BB991B15D65B0033E644 /* ProximaNovaSoft-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03C9BB8B1B15D5970033E644 /* ProximaNovaSoft-Bold.otf */; };
+		03C9BB9A1B15D65E0033E644 /* ProximaNovaSoft-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03C9BB8C1B15D5970033E644 /* ProximaNovaSoft-Regular.otf */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -152,6 +154,8 @@
 		037FEDCF1B11AFD300FFF653 /* foundation-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "foundation-icons.ttf"; sourceTree = "<group>"; };
 		037FEDD01B11AFD300FFF653 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
 		037FEDD11B11AFD300FFF653 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
+		03C9BB8B1B15D5970033E644 /* ProximaNovaSoft-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaSoft-Bold.otf"; sourceTree = "<group>"; };
+		03C9BB8C1B15D5970033E644 /* ProximaNovaSoft-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaSoft-Regular.otf"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* MatterhornNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatterhornNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -272,6 +276,8 @@
 		035ED89A1B106C7F00C17B7E /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				03C9BB8B1B15D5970033E644 /* ProximaNovaSoft-Bold.otf */,
+				03C9BB8C1B15D5970033E644 /* ProximaNovaSoft-Regular.otf */,
 				035ED89B1B106C7F00C17B7E /* ProximaNova-Bold.otf */,
 				035ED89C1B106C7F00C17B7E /* ProximaNova-Reg.otf */,
 			);
@@ -456,6 +462,9 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = D6HY749PTF;
+					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "MatterhornNative" */;
@@ -627,6 +636,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
+				03C9BB991B15D65B0033E644 /* ProximaNovaSoft-Bold.otf in Resources */,
+				03C9BB9A1B15D65E0033E644 /* ProximaNovaSoft-Regular.otf in Resources */,
 				035ED89D1B106C7F00C17B7E /* ProximaNova-Bold.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				035ED89E1B106C7F00C17B7E /* ProximaNova-Reg.otf in Resources */,
@@ -718,6 +729,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -727,6 +740,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = MatterhornNative;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -734,6 +748,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -743,6 +759,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = MatterhornNative;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

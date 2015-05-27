@@ -35,10 +35,13 @@ class ProjectsOverview extends React.Component {
       return this.renderLoadingView();
     }
     return (
-      <ListView
-        style={styles.listView}
-        dataSource={this.state.dataSource}
-        renderRow={this.renderProject.bind(this)} />
+      <View style={{flex:1}}>
+        {this.renderHeader()}
+        <ListView
+          style={styles.listView}
+          dataSource={this.state.dataSource}
+          renderRow={this.renderProject.bind(this)} />
+      </View>
     );
   }
 
@@ -53,21 +56,36 @@ class ProjectsOverview extends React.Component {
     );
   }
 
+  renderHeader() {
+    return (
+      <View style={[styles.headerContainer]}>
+        <Text style={[styles.header]}>{'Projects'}</Text>
+      </View>
+    )
+  }
+
   rowPressed(id) {
     var project = this.state.projects
-      .filter(prop => prop.id === id)[0];
+      .filter(project => project.id === id)[0];
+    var features = this.state.features
+      .filter(feature => feature.project_id === project.id);
     this.props.navigator.push({
       title: project.title,
       component: ProjectView,
       backButtonTitle: 'Custom Back',
-      passProps: {project: project},
+      passProps: {
+        project: project,
+        features: features,
+        tickets: this.state.tickets
+      },
     });
   }
 
   renderProject(project) {
     var projectStyle = {
       flex: 1,
-      backgroundColor: project.color,
+      borderColor:'#E7E7E7',
+      borderBottomWidth:1
     }
     return (
       <TouchableHighlight onPress={() => this.rowPressed(project.id)}
@@ -91,12 +109,15 @@ class ProjectsOverview extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization':'Token user_token="cCPvTzMwc9-8rxggmYvh", user_email="josh@seriousfox.co.uk"'
+        // 'Authorization':'Token user_token="cCPvTzMwc9-8rxggmYvh", user_email="josh@seriousfox.co.uk"'
       }
     })
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
           projects:responseData.projects,
+          features:responseData.features,
+          tickets:responseData.tickets,
           dataSource: this.state.dataSource.cloneWithRows(responseData.projects),
           loaded: true,
         });
@@ -118,29 +139,31 @@ var styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'yellow',
   },
+  headerContainer: {
+    backgroundColor:'#4A4C59',
+    marginTop: 0,
+    paddingBottom: 0,
+  },
+
+  header: {
+    color:'#fff',
+    fontFamily: 'Proxima Nova',
+    fontSize: 23,
+    fontWeight: '700',
+    alignSelf: 'center',
+    marginTop: 24,
+    marginBottom: 12,
+  },
   title: {
     fontFamily: 'Proxima Nova',
     fontWeight:'bold',
     color:'#666',
     fontSize: 20,
-    marginTop: 24,
-    marginBottom: 24,
-    textAlign: 'center',
+    padding:15,
   },
   listView: {
     paddingTop: 0,
-    backgroundColor: '#F5FCFF',
-  },
-  centering: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  gray: {
     backgroundColor: '#fff',
-  },
-  horizontal: {
-    flexDirection: 'row',
-    justifyContent: 'center',
   },
 });
 

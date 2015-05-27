@@ -26,6 +26,8 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>ProximaNovaSoft-Bold.otf</string>
+		<string>ProximaNovaSoft-Regular.otf</string>
 		<string>ProximaNova-Reg.otf</string>
 		<string>ProximaNova-Bold.otf</string>
 	</array>

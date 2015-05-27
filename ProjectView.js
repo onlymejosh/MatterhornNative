@@ -1,7 +1,11 @@
 'use strict';
 
 var React = require('react-native');
-var ScheduledFeature = require('./ScheduledFeature')
+var Feature = require('./Feature')
+var TicketFilter = require('./TicketFilter')
+var SMXTabBarIOS = require('SMXTabBarIOS');
+var SMXTabBarItemIOS = SMXTabBarIOS.Item;
+
 var {
   StyleSheet,
   Image,
@@ -11,52 +15,6 @@ var {
   Component
 } = React;
 
-var SCHEDULED = [
-  {
-    feature:{
-      id: 1,
-      title: 'Matterhorn CLI',
-      local_id: 542,
-      tickets: [
-        {
-          id: 12,
-          title: 'Email Remco',
-          local_id: 432
-        }
-      ]
-    }
-  },{
-    feature:{
-      id: 1,
-      title: 'Project',
-      local_id: 467,
-      tickets: [
-        {
-          id: 12,
-          title: 'When 403 from find we should direct to accounts page',
-          local_id: 754
-        },{
-          id: 12,
-          title: 'Ability to create a ticket without a feature',
-          local_id: 756
-        },
-      ]
-    }
-  },{
-    feature:{
-      id: 1,
-      title: 'Feedback',
-      local_id: 1357,
-      tickets: [
-        {
-          id: 12,
-          title: 'Make sure to add min height to description field',
-          local_id: 431
-        }
-      ]
-    }
-  },
-];
 
 class ProjectView extends Component {
   constructor(props) {
@@ -64,43 +22,45 @@ class ProjectView extends Component {
     this.state = {
       loaded: false,
       project:props.route.passProps.project,
+      features:props.route.passProps.features,
+      tickets:props.route.passProps.tickets,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       })
     };
-    this.state.dataSource = this.state.dataSource.cloneWithRows(SCHEDULED);
+    this.state.dataSource = this.state.dataSource.cloneWithRows(this.state.features);
   }
 
   renderHeader() {
-    var projectStyle = {
-      backgroundColor: this.state.project.color,
-    }
     return (
-      <View style={[styles.headerContainer, projectStyle]}>
+      <View style={[styles.headerContainer]}>
         <Text style={[styles.header]}>{this.state.project.title}</Text>
       </View>
     )
   }
 
   renderFeature(feature) {
+    var tickets = this.state.tickets
+      .filter(ticket => ticket.feature_id == feature.id)
+      // .filter(feature => feature.project_id === project.id);
+    console.log(tickets)
     return (
-      <ScheduledFeature
-        feature={feature} />
-    )
+      <Feature
+        feature={feature}
+        tickets={tickets} />
+    );
   }
 
   render() {
     return (
       <View style={styles.container}>
         {this.renderHeader()}
-        <View style={styles.scheduledForToday}>
-          <Text style={[styles.title]}>{'Scheduled For Today'}</Text>
-          <ListView
-            style={styles.listView}
-            dataSource={this.state.dataSource}
-            renderRow={(feature) => this.renderFeature(feature)}
-            />
-        </View>
+        <TicketFilter/>
+        <ListView
+          style={styles.listView}
+          dataSource={this.state.dataSource}
+          renderRow={(feature) => this.renderFeature(feature)}
+          />
       </View>
     );
   }
@@ -109,15 +69,16 @@ class ProjectView extends Component {
 var styles = React.StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:'#DCDCDC',
   },
   headerContainer: {
-    backgroundColor:'#565868',
+    backgroundColor:'#4A4C59',
     marginTop: 0,
     paddingBottom: 0,
   },
 
   header: {
-    color:'#666',
+    color:'#fff',
     fontFamily: 'Proxima Nova',
     fontSize: 23,
     fontWeight: '700',
@@ -129,15 +90,17 @@ var styles = React.StyleSheet.create({
     fontWeight: '700',
     color: '#4a4c5a',
   },
-  scheduledForToday: {
-    backgroundColor:'#F7F7F7',
-    borderRadius:5,
-    margin:5,
-    padding:10,
-  },
+  // scheduledForToday: {
+  //   // flex:1,
+  //   backgroundColor:'#F7F7F7',
+  //   borderRadius:5,
+  //   margin:5,
+  //   padding:10,
+  // },
   listView: {
+    marginTop:15,
     flex: 1,
-  }
+  },
 });
 
 module.exports = ProjectView;

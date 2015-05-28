@@ -12,20 +12,7 @@ var {
 var styles = React.StyleSheet.create({
   container: {
     flex: 1
-  },
-  headerContainer: {
-    marginTop: 45,
-    paddingBottom: 5,
-  },
-
-  header: {
-    fontFamily: 'Avenir',
-    fontSize: 23,
-    fontWeight: '700',
-    alignSelf: 'center',
-    marginTop: 0,
-    marginBottom: 0,
-  },
+  }
 });
 
 class MatterhornNative extends React.Component {

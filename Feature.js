@@ -17,13 +17,11 @@ class Feature extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      feature: props.feature,
-      tickets: props.tickets,
       dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
+        rowHasChanged: (row1, row2) => true,
       })
     };
-    this.state.dataSource = this.state.dataSource.cloneWithRows(this.state.tickets);
+    this.state.dataSource = this.state.dataSource.cloneWithRows(this.props.tickets);
   }
 
   renderTicket(ticket) {
@@ -33,7 +31,11 @@ class Feature extends Component {
     )
   }
   render() {
-    var feature = this.state.feature;
+    console.log('Feature:render')
+    console.log(this.state.dataSource)
+    console.log(this.props.tickets)
+    var feature = this.props.feature;
+
     return (
       <View style={styles.feature}>
         <View style={styles.featureHeader}>

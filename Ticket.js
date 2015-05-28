@@ -15,6 +15,7 @@ var {
 class Ticket extends Component {
   render() {
     var ticket = this.props.ticket;
+    console.log('Ticket:render')
     return (
       <View style={styles.ticket}>
         <View style={styles.leftContainer}>
@@ -39,7 +40,13 @@ class Ticket extends Component {
       </View>
     );
   }
+
+  componentWillReceiveProps() {
+    console.log('didrec')
+  }
 }
+
+
 
 var styles = React.StyleSheet.create({
   ticket: {

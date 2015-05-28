@@ -3,13 +3,12 @@
 var React = require('react-native');
 var Feature = require('./Feature')
 var TicketFilter = require('./TicketFilter')
-var SMXTabBarIOS = require('SMXTabBarIOS');
-var SMXTabBarItemIOS = SMXTabBarIOS.Item;
 
 var {
   StyleSheet,
   Image,
   ListView,
+  ScrollView,
   View,
   Text,
   Component
@@ -21,44 +20,55 @@ class ProjectView extends Component {
     super(props);
     this.state = {
       loaded: false,
-      project:props.route.passProps.project,
-      features:props.route.passProps.features,
-      tickets:props.route.passProps.tickets,
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      })
+      features: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => true
+      }),
     };
-    this.state.dataSource = this.state.dataSource.cloneWithRows(this.state.features);
+    var features = [];
+    for(var feature of this.props.route.passProps.features) {
+      feature.tickets = this.props.route.passProps.tickets
+        .filter(ticket => 
+          ticket.feature_id == feature.id)
+
+      features.push(feature)
+    }
+    this.state.features = this.state.features.cloneWithRows(features)
+    this.state.unFilteredFeatures = JSON.parse(JSON.stringify(features));
   }
 
   renderHeader() {
     return (
       <View style={[styles.headerContainer]}>
-        <Text style={[styles.header]}>{this.state.project.title}</Text>
+        <Text style={[styles.header]}>{this.props.route.passProps.project.title}</Text>
       </View>
     )
   }
 
   renderFeature(feature) {
-    var tickets = this.state.tickets
-      .filter(ticket => ticket.feature_id == feature.id)
-      // .filter(feature => feature.project_id === project.id);
-    console.log(tickets)
     return (
       <Feature
         feature={feature}
-        tickets={tickets} />
+        tickets={feature.tickets} />
     );
   }
 
+  handleState(ticket_state) {
+    var features = [];
+    for(var feature of JSON.parse(JSON.stringify(this.state.unFilteredFeatures))) {
+      feature.tickets = feature.tickets.filter(ticket => ticket.state === ticket_state)
+      features.push(feature)
+    }
+    this.setState({features: this.state.features.cloneWithRows(features)})
+  }
   render() {
     return (
       <View style={styles.container}>
         {this.renderHeader()}
-        <TicketFilter/>
+        <TicketFilter
+          onClick={this.handleState.bind(this)}/>
         <ListView
           style={styles.listView}
-          dataSource={this.state.dataSource}
+          dataSource={this.state.features}
           renderRow={(feature) => this.renderFeature(feature)}
           />
       </View>
@@ -76,7 +86,6 @@ var styles = React.StyleSheet.create({
     marginTop: 0,
     paddingBottom: 0,
   },
-
   header: {
     color:'#fff',
     fontFamily: 'Proxima Nova',
@@ -90,13 +99,6 @@ var styles = React.StyleSheet.create({
     fontWeight: '700',
     color: '#4a4c5a',
   },
-  // scheduledForToday: {
-  //   // flex:1,
-  //   backgroundColor:'#F7F7F7',
-  //   borderRadius:5,
-  //   margin:5,
-  //   padding:10,
-  // },
   listView: {
     marginTop:15,
     flex: 1,

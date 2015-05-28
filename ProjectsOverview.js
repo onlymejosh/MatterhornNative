@@ -109,7 +109,6 @@ class ProjectsOverview extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization':'Token user_token="cCPvTzMwc9-8rxggmYvh", user_email="josh@seriousfox.co.uk"'
-        // 'Authorization':'Token user_token="cCPvTzMwc9-8rxggmYvh", user_email="josh@seriousfox.co.uk"'
       }
     })
       .then((response) => response.json())

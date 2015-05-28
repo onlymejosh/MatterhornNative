@@ -32,10 +32,14 @@ class ProjectView extends Component {
 
       features.push(feature)
     }
-    this.state.features = this.state.features.cloneWithRows(features)
+    // this.state.features = this.state.features.cloneWithRows(features)
     this.state.unFilteredFeatures = JSON.parse(JSON.stringify(features));
   }
 
+  componentWillMount() {
+    // set the initial state of the tickets
+    this.handleState('todo');
+  }
   renderHeader() {
     return (
       <View style={[styles.headerContainer]}>
@@ -53,6 +57,7 @@ class ProjectView extends Component {
   }
 
   handleState(ticket_state) {
+    console.log(ticket_state)
     var features = [];
     for(var feature of JSON.parse(JSON.stringify(this.state.unFilteredFeatures))) {
       feature.tickets = feature.tickets.filter(ticket => ticket.state === ticket_state)

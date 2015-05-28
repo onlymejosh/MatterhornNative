@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-
+var SegmentedView = require('react-native-segmented-view')
 var {
   AppRegistry,
   StyleSheet,
@@ -14,47 +14,33 @@ var {
 class TicketFilter extends Component {
   constructor(props) {
     super(props);
+    this.selected = this.props.selected || 'todo'
+    this.state = {
+      index:0,
+      filters: ["To Do", "In Progress", "Completed"],
+      filterValues: ["todo", "inprogress", "completed"] 
+    }
   }
-  _handleToDo() {
-    console.log(this)
-    this._onPressButton('todo')
-  }
-  _onPressButton(value) {
-    console.log(value)
-    console.log(this.props)
 
-    this.props.onPress.bind(this,value)
+  _onPressButton(index) {
+    this.setState({index: index.index})
+    this.props.onClick(this.state.filterValues[index.index])
   }
+
+
   render() {
+
     return (
-    //   <View style={{flexDirection: 'row'}}>
-    //   <View style={{flex: 1, backgroundColor: 'red', height:20}} />
-    //   <View style={{flex: 1}} />
-    //   <View style={{flex: 1}} />
-    // </View>
-      <View style={styles.filterBar}>
-        <View style={styles.filterButton}>
-          <TouchableOpacity onPress={this.props.onClick.bind(this,'todo')}>
-            <Text style={styles.filterText}>
-              To Do
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.filterButton}>
-          <TouchableOpacity onPress={this.props.onClick.bind(this,'inprogress')}>
-            <Text style={styles.filterText}>
-              In Progress
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.filterButton}>
-          <TouchableOpacity onPress={this.props.onClick.bind(this,'complete')}>
-            <Text style={styles.filterText}>
-              Complete
-            </Text>
-          </TouchableOpacity>
-        </View>
+      <View>
+        <SegmentedView
+            titles={this.state.filters}
+            index={this.state.index}
+            stretch
+            onPress={index => this._onPressButton({ index })}
+        />
+        
       </View>
+      
     );
   }
 }
@@ -87,6 +73,10 @@ var styles = React.StyleSheet.create({
     color:'#666',
     justifyContent: 'center',
     textAlign: 'center',
+  },
+  active: {
+    fontWeight:'bold',
+    backgroundColor:'red',
   },
 
 });

@@ -31,22 +31,25 @@ class Feature extends Component {
     )
   }
   render() {
-    console.log('Feature:render')
-    console.log(this.state.dataSource)
-    console.log(this.props.tickets)
     var feature = this.props.feature;
-
-    return (
-      <View style={styles.feature}>
-        <View style={styles.featureHeader}>
-          <Text style={styles.featureTitle}>{feature.title}</Text>
+    
+    if (this.props.tickets.length > 0) {
+      return (
+        <View style={styles.feature}>
+          <View style={styles.featureHeader}>
+            <Text style={styles.featureTitle}>{feature.title}</Text>
+          </View>
+          <View style={{flex:1}}>
+            {this.props.tickets.map((ticket) => this.renderTicket(ticket)) }
+          </View>
         </View>
-        <ListView
-            dataSource={this.state.dataSource}
-            renderRow={(ticket) => this.renderTicket(ticket)}
-            />
-      </View>
-    );
+      );
+    } else {
+      return (
+        <View />
+      );
+    }
+    
   }
 }
 

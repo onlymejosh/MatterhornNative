@@ -16,7 +16,7 @@ var {
 } = React;
 
 var URLS = {
-  projects: 'http://api.matterhorn.dev/api/v1/projects'
+  projects: 'http://api.matterhorn.io/api/v1/projects'
 };
 
 class ProjectsOverview extends React.Component {

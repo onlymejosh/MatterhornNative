@@ -3,6 +3,8 @@
 var React = require('react-native');
 var ProjectView = require('./ProjectView');
 
+var styles = require('../Styles/ProjectsOverviewStyles');
+
 var {
   AppRegistry,
   Image,
@@ -108,7 +110,7 @@ class ProjectsOverview extends React.Component {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization':'Token user_token="cCPvTzMwc9-8rxggmYvh", user_email="josh@seriousfox.co.uk"'
+        'Authorization':this.props.route.passProps.authentication
       }
     })
       .then((response) => response.json())
@@ -121,49 +123,10 @@ class ProjectsOverview extends React.Component {
           loaded: true,
         });
       })
+      .catch((response) =>{
+      })
       .done();
   }
 }
-
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  projectContainer: {
-    flex: 1,
-    backgroundColor: 'yellow',
-  },
-  headerContainer: {
-    backgroundColor:'#4A4C59',
-    marginTop: 0,
-    paddingBottom: 0,
-  },
-
-  header: {
-    color:'#fff',
-    fontFamily: 'Proxima Nova',
-    fontSize: 23,
-    fontWeight: '700',
-    alignSelf: 'center',
-    marginTop: 24,
-    marginBottom: 12,
-  },
-  title: {
-    fontFamily: 'Proxima Nova',
-    fontWeight:'bold',
-    color:'#666',
-    fontSize: 20,
-    padding:15,
-  },
-  listView: {
-    paddingTop: 0,
-    backgroundColor: '#fff',
-  },
-});
 
 module.exports = ProjectsOverview

@@ -3,7 +3,7 @@
 var React = require('react-native');
 var Feature = require('./Feature')
 var TicketFilter = require('./TicketFilter')
-
+var styles = require('../Styles/ProjectViewStyles');
 var {
   StyleSheet,
   Image,
@@ -27,7 +27,7 @@ class ProjectView extends Component {
     var features = [];
     for(var feature of this.props.route.passProps.features) {
       feature.tickets = this.props.route.passProps.tickets
-        .filter(ticket => 
+        .filter(ticket =>
           ticket.feature_id == feature.id)
 
       features.push(feature)
@@ -80,34 +80,5 @@ class ProjectView extends Component {
     );
   }
 };
-
-var styles = React.StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor:'#DCDCDC',
-  },
-  headerContainer: {
-    backgroundColor:'#4A4C59',
-    marginTop: 0,
-    paddingBottom: 0,
-  },
-  header: {
-    color:'#fff',
-    fontFamily: 'Proxima Nova',
-    fontSize: 23,
-    fontWeight: '700',
-    alignSelf: 'center',
-    marginTop: 24,
-    marginBottom: 12,
-  },
-  title: {
-    fontWeight: '700',
-    color: '#4a4c5a',
-  },
-  listView: {
-    marginTop:15,
-    flex: 1,
-  },
-});
 
 module.exports = ProjectView;

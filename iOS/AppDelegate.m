@@ -11,6 +11,8 @@
 
 #import "RCTRootView.h"
 
+#import "SLKTextViewController.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -19,7 +21,7 @@
 
   /**
    * Loading JavaScript code - uncomment the one you want.
-   *
+   *A
    * OPTION 1
    * Load from development server. Start the server from the repository root:
    *
@@ -31,7 +33,7 @@
    * on the same Wi-Fi network.
    */
 
-  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
+  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/App/index.ios.bundle"];
 
   /**
    

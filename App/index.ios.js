@@ -1,8 +1,8 @@
 'use strict';
 
 var React = require('react-native');
-var ProjectsOverview = require('./App/Components/ProjectsOverview');
-var Login = require('./App/Components/Login');
+var ProjectsOverview = require('./Components/ProjectsOverview');
+var Login = require('./Components/Login');
 
 var {
   View,

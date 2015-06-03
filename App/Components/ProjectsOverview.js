@@ -4,6 +4,8 @@ var React = require('react-native');
 var ProjectView = require('./ProjectView');
 
 var styles = require('../Styles/ProjectsOverviewStyles');
+var SideMenu = require('react-native-side-menu');
+var Sidebar = require('./Sidebar');
 
 var {
   AppRegistry,
@@ -18,7 +20,7 @@ var {
 } = React;
 
 var URLS = {
-  projects: 'http://api.matterhorn.io/api/v1/projects'
+  projects: 'http://0.0.0.0:3000/api/v1/projects'
 };
 
 class ProjectsOverview extends React.Component {
@@ -29,6 +31,7 @@ class ProjectsOverview extends React.Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
       loaded: false,
+      isMenuOpen:true
     }
   }
 
@@ -36,14 +39,20 @@ class ProjectsOverview extends React.Component {
     if (!this.state.loaded) {
       return this.renderLoadingView();
     }
+    var menu = <Sidebar projects={this.state.projects} navigator={this.props.navigator}></Sidebar>
     return (
-      <View style={{flex:1}}>
-        {this.renderHeader()}
-        <ListView
-          style={styles.listView}
-          dataSource={this.state.dataSource}
-          renderRow={this.renderProject.bind(this)} />
-      </View>
+      <SideMenu menu={menu}
+        isOpen={this.state.isMenuOpen}
+        openMenuOffset={'300'}>
+        <View style={{flex:1}}>
+          {this.renderHeader()}
+          <ListView
+            style={styles.listView}
+            dataSource={this.state.dataSource}
+            renderRow={this.renderProject.bind(this)} />
+        </View>
+      </SideMenu>
+
     );
   }
 
@@ -58,11 +67,17 @@ class ProjectsOverview extends React.Component {
     );
   }
 
+  handleSidebar() {
+    console.log(this.props)
+  }
+
   renderHeader() {
     return (
+      <TouchableHighlight onPress={() => this.handleSidebar}>
       <View style={[styles.headerContainer]}>
         <Text style={[styles.header]}>{'Projects'}</Text>
       </View>
+      </TouchableHighlight>
     )
   }
 

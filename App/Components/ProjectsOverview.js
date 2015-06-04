@@ -1,16 +1,16 @@
 'use strict';
 
 var React = require('react-native');
-var ProjectView = require('./ProjectView');
-
-var styles = require('../Styles/ProjectsOverviewStyles');
+var Icon = require('FAKIconImage');
 var SideMenu = require('react-native-side-menu');
-var Sidebar = require('./Sidebar');
 
+var ProjectView = require('./ProjectView');
+var Sidebar = require('./Sidebar');
+var styles = require('../Styles/ProjectsOverviewStyles');
+var header = require('../Styles/HeaderStyles');
 var {
   AppRegistry,
   Image,
-  ListView,
   StyleSheet,
   Text,
   View,
@@ -27,19 +27,10 @@ class ProjectsOverview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
-      loaded: false,
-      isMenuOpen:true
+      loaded: false
     }
   }
 
-  handleSideMenuChange() {
-    this.setState({
-      isMenuOpen: !this.state.isMenuOpen
-    });
-  }
   render() {
     if (!this.state.loaded) {
       return this.renderLoadingView();
@@ -50,20 +41,17 @@ class ProjectsOverview extends React.Component {
                         navigator={this.props.navigator}></Sidebar>
     return (
       <SideMenu menu={menu}
-        touchToClose='true'
-        disableGestures='true'
-        onChange={this.handleSideMenuChange.bind(this)}
+        touchToClose={true}
+        disableGestures={true}
         openMenuOffset={'300'}
         ref="sideMenu">
         <View style={{flex:1}}>
           {this.renderHeader()}
-          <ListView
-            style={styles.listView}
-            dataSource={this.state.dataSource}
-            renderRow={this.renderProject.bind(this)} />
+          <View style={{flex:1,paddingTop:0,backgroundColor:'#fff'}}>
+            <Text>TODO: Dashboard BRO</Text>
+          </View>
         </View>
       </SideMenu>
-
     );
   }
 
@@ -84,47 +72,18 @@ class ProjectsOverview extends React.Component {
 
   renderHeader() {
     return (
-      <TouchableHighlight onPress={() => this.handleSidebar()}>
-      <View style={[styles.headerContainer]}>
-        <Text style={[styles.header]}>{'Projects'}</Text>
+      <View style={header.container}>
+        <TouchableHighlight onPress={() => this.handleSidebar()}>
+          <Icon
+            name='fontawesome|bars'
+            size={30}
+            color={'#F7F7F7'}
+            style={header.menuButton}
+          />
+        </TouchableHighlight>
+      <Text style={[header.headerText]}>{'Dashboard'}</Text>
       </View>
-      </TouchableHighlight>
     )
-  }
-
-  rowPressed(id) {
-    var project = this.state.projects
-      .filter(project => project.id === id)[0];
-    var features = this.state.features
-      .filter(feature => feature.project_id === project.id);
-    this.props.navigator.push({
-      title: project.title,
-      component: ProjectView,
-      backButtonTitle: 'Custom Back',
-      passProps: {
-        project: project,
-        features: features,
-        tickets: this.state.tickets
-      },
-    });
-  }
-
-  renderProject(project) {
-    var projectStyle = {
-      flex: 1,
-      borderColor:'#E7E7E7',
-      borderBottomWidth:1
-    }
-    return (
-      <TouchableHighlight onPress={() => this.rowPressed(project.id)}
-          underlayColor='#dddddd'>
-        <View style={styles.projectsList}>
-          <View style={projectStyle}>
-            <Text style={styles.title}>{project.title}</Text>
-          </View>
-        </View>
-      </TouchableHighlight>
-    );
   }
 
   componentDidMount() {
@@ -145,7 +104,6 @@ class ProjectsOverview extends React.Component {
           projects:responseData.projects,
           features:responseData.features,
           tickets:responseData.tickets,
-          dataSource: this.state.dataSource.cloneWithRows(responseData.projects),
           loaded: true,
         });
       })

@@ -4,9 +4,10 @@ var React = require('react-native');
 
 var Feature = require('./Feature')
 var TicketFilter = require('./TicketFilter')
+var Header = require('./Header');
 
 var styles = require('../Styles/ProjectViewStyles');
-var header = require('../Styles/HeaderStyles');
+
 
 var {
   StyleSheet,
@@ -43,13 +44,6 @@ class ProjectView extends Component {
     // set the initial state of the tickets
     this.handleState('todo');
   }
-  renderHeader() {
-    return (
-      <View style={header.container}>
-        <Text style={[header.headerText]}>{this.props.route.passProps.project.title}</Text>
-      </View>
-    )
-  }
 
   renderFeature(feature) {
     return (
@@ -60,7 +54,6 @@ class ProjectView extends Component {
   }
 
   handleState(ticket_state) {
-    console.log(ticket_state)
     var features = [];
     for(var feature of JSON.parse(JSON.stringify(this.state.unFilteredFeatures))) {
       feature.tickets = feature.tickets.filter(ticket => ticket.state === ticket_state)
@@ -71,7 +64,9 @@ class ProjectView extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.renderHeader()}
+        <Header onSideMenu={() => this.handleSidebar()}
+                title={this.props.route.passProps.project.title} />
+
         <TicketFilter
           onClick={this.handleState.bind(this)}/>
         <ListView

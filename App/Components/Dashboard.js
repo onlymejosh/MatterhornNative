@@ -8,7 +8,7 @@ var api = require('../Utils/api.js');
 var ProjectView = require('./ProjectView');
 var Sidebar = require('./Sidebar');
 var styles = require('../Styles/Dashboard');
-var header = require('../Styles/HeaderStyles');
+var Header = require('./Header');
 
 var {
   AppRegistry,
@@ -43,12 +43,13 @@ class Dashboard extends React.Component {
                         navigator={this.props.navigator}></Sidebar>
     return (
       <SideMenu menu={menu}
-        touchToClose={true}
-        disableGestures={true}
-        openMenuOffset={'300'}
-        ref="sideMenu">
+                touchToClose={true}
+                disableGestures={true}
+                openMenuOffset={'300'}
+                ref="sideMenu">
         <View style={{flex:1}}>
-          {this.renderHeader()}
+          <Header onSideMenu={() => this.handleSidebar()}
+                  title="Dashboard" />
           <View style={{flex:1,paddingTop:0,backgroundColor:'#fff'}}>
             <Text>TODO:  BRO</Text>
           </View>
@@ -70,22 +71,6 @@ class Dashboard extends React.Component {
 
   handleSidebar() {
     this.refs.sideMenu.openMenu()
-  }
-
-  renderHeader() {
-    return (
-      <View style={header.container}>
-        <TouchableHighlight onPress={() => this.handleSidebar()}>
-          <Icon
-            name='fontawesome|bars'
-            size={30}
-            color={'#F7F7F7'}
-            style={header.menuButton}
-          />
-        </TouchableHighlight>
-        <Text style={[header.headerText]}>{'Dashboard'}</Text>
-      </View>
-    )
   }
 
   componentDidMount() {

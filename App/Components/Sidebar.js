@@ -2,6 +2,8 @@
 
 var React = require('react-native');
 var NotificationBadge = require('./NotificationBadge');
+var ProjectView = require('./ProjectView');
+
 var {
   AppRegistry,
   Image,
@@ -55,7 +57,7 @@ class Sidebar extends React.Component {
       backgroundColor:project.color
     };
     return (
-      <TouchableHighlight onPress={() => this.renderProject(project.id)}
+      <TouchableHighlight onPress={() => this.rowPressed(project.id)}
           underlayColor='#dddddd'>
         <View style={styles.projectsList}>
           <View style={projectStyle}>
@@ -67,6 +69,23 @@ class Sidebar extends React.Component {
         </View>
       </TouchableHighlight>
     );
+  }
+
+  rowPressed(id) {
+    var project = this.props.projects
+      .filter(project => project.id === id)[0];
+    var features = this.props.features
+      .filter(feature => feature.project_id === project.id);
+    this.props.menuActions.close();
+    this.props.navigator.push({
+      title: project.title,
+      component: ProjectView,
+      passProps: {
+        project: project,
+        features: features,
+        tickets: this.props.tickets
+      },
+    });
   }
 }
 

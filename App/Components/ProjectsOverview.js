@@ -35,15 +35,26 @@ class ProjectsOverview extends React.Component {
     }
   }
 
+  handleSideMenuChange() {
+    this.setState({
+      isMenuOpen: !this.state.isMenuOpen
+    });
+  }
   render() {
     if (!this.state.loaded) {
       return this.renderLoadingView();
     }
-    var menu = <Sidebar projects={this.state.projects} navigator={this.props.navigator}></Sidebar>
+    var menu = <Sidebar projects={this.state.projects}
+                        features={this.state.features}
+                        tickets={this.state.tickets}
+                        navigator={this.props.navigator}></Sidebar>
     return (
       <SideMenu menu={menu}
-        isOpen={this.state.isMenuOpen}
-        openMenuOffset={'300'}>
+        touchToClose='true'
+        disableGestures='true'
+        onChange={this.handleSideMenuChange.bind(this)}
+        openMenuOffset={'300'}
+        ref="sideMenu">
         <View style={{flex:1}}>
           {this.renderHeader()}
           <ListView
@@ -68,12 +79,12 @@ class ProjectsOverview extends React.Component {
   }
 
   handleSidebar() {
-    console.log(this.props)
+    this.refs.sideMenu.openMenu()
   }
 
   renderHeader() {
     return (
-      <TouchableHighlight onPress={() => this.handleSidebar}>
+      <TouchableHighlight onPress={() => this.handleSidebar()}>
       <View style={[styles.headerContainer]}>
         <Text style={[styles.header]}>{'Projects'}</Text>
       </View>

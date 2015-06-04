@@ -1,4 +1,4 @@
-//
+  //
 //  SlackTextViewUtil.h
 //  MatterhornNative
 //

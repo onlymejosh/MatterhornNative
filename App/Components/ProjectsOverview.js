@@ -4,10 +4,12 @@ var React = require('react-native');
 var Icon = require('FAKIconImage');
 var SideMenu = require('react-native-side-menu');
 
+var api = require('../Utils/api.js');
 var ProjectView = require('./ProjectView');
 var Sidebar = require('./Sidebar');
 var styles = require('../Styles/ProjectsOverviewStyles');
 var header = require('../Styles/HeaderStyles');
+
 var {
   AppRegistry,
   Image,
@@ -91,14 +93,7 @@ class ProjectsOverview extends React.Component {
   }
 
   fetchData(model) {
-    fetch(URLS[model],{
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization':this.props.route.passProps.authentication
-      }
-    })
-      .then((response) => response.json())
+    api.getProjects(this.props.route.passProps.authentication)
       .then((responseData) => {
         this.setState({
           projects:responseData.projects,

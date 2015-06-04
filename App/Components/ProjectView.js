@@ -1,13 +1,13 @@
 'use strict';
 
 var React = require('react-native');
+var SideMenu = require('react-native-side-menu');
 
 var Feature = require('./Feature')
 var TicketFilter = require('./TicketFilter')
 var Header = require('./Header');
 
 var styles = require('../Styles/ProjectViewStyles');
-
 
 var {
   StyleSheet,
@@ -18,6 +18,7 @@ var {
   Text,
   Component
 } = React;
+
 
 class ProjectView extends Component {
   constructor(props) {
@@ -61,20 +62,38 @@ class ProjectView extends Component {
     }
     this.setState({features: this.state.features.cloneWithRows(features)})
   }
-  render() {
-    return (
-      <View style={styles.container}>
-        <Header onSideMenu={() => this.handleSidebar()}
-                title={this.props.route.passProps.project.title} />
 
-        <TicketFilter
-          onClick={this.handleState.bind(this)}/>
-        <ListView
-          style={styles.listView}
-          dataSource={this.state.features}
-          renderRow={(feature) => this.renderFeature(feature)}
-          />
-      </View>
+  handleSidebar() {
+    this.refs.sideMenu.openMenu()
+  }
+
+  render() {
+    var Sidebar = require('./Sidebar');
+    var menu = <Sidebar projects={this.props.route.passProps.projects}
+                        features={this.props.route.passProps.features}
+                        tickets={this.props.route.passProps.tickets}
+                        navigator={this.props.navigator}></Sidebar>
+    return (
+      <SideMenu menu={menu}
+                touchToClose={true}
+                disableGestures={true}
+                openMenuOffset={'300'}
+                ref="sideMenu">
+        <View style={styles.container}>
+          <Header onSideMenu={() => this.handleSidebar()}
+                  title={this.props.route.passProps.project.title} />
+
+          <TicketFilter
+            onClick={this.handleState.bind(this)}/>
+          <ListView
+            style={styles.listView}
+            dataSource={this.state.features}
+            renderRow={(feature) => this.renderFeature(feature)}
+            />
+        </View>
+      </SideMenu>
+
+
     );
   }
 };

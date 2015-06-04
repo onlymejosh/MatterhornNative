@@ -20,6 +20,11 @@ class Sidebar extends React.Component {
     super(props);
   }
 
+  goToDashboard() {
+    this.props.menuActions.close();
+    this.props.navigator.popToTop()
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -31,7 +36,7 @@ class Sidebar extends React.Component {
             source={{uri: 'http://resizing.flixster.com/DeLpPTAwX3O2LszOpeaMHjbzuAw=/53x77/dkpu1ddg7pbsk.cloudfront.net/movie/11/16/47/11164719_ori.jpg'}}
             style={styles.avatar}
           />
-          <Text style={styles.mainContent}>My </Text>
+        <Text onPress={ () => this.goToDashboard() } style={styles.mainContent}>My Dashbord</Text>
           <NotificationBadge count={0} style={styles.badge}/>
         </View>
         <View style={styles.projectsContainer}>
@@ -81,6 +86,7 @@ class Sidebar extends React.Component {
       title: project.title,
       component: ProjectView,
       passProps: {
+        projects:this.props.projects,
         project: project,
         features: features,
         tickets: this.props.tickets

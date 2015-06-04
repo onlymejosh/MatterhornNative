@@ -26,12 +26,12 @@ class Sidebar extends React.Component {
         <View style={[styles.headerContainer]}>
           <Text style={[styles.header]}>{'Serious Fox'}</Text>
         </View>
-        <View style={styles.dashboardContainer}>
+        <View style={styles.Container}>
           <Image
             source={{uri: 'http://resizing.flixster.com/DeLpPTAwX3O2LszOpeaMHjbzuAw=/53x77/dkpu1ddg7pbsk.cloudfront.net/movie/11/16/47/11164719_ori.jpg'}}
             style={styles.avatar}
           />
-          <Text style={styles.mainContent}>My Dashboard</Text>
+          <Text style={styles.mainContent}>My </Text>
           <NotificationBadge count={0} style={styles.badge}/>
         </View>
         <View style={styles.projectsContainer}>
@@ -120,7 +120,7 @@ var styles = StyleSheet.create({
     marginBottom: 12,
     marginLeft: 12,
   },
-  dashboardContainer: {
+  Container: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-start',

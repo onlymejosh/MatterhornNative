@@ -2,7 +2,7 @@
 
 var React = require('react-native');
 var t = require('tcomb-form-native');
-var ProjectsOverview = require('./ProjectsOverview');
+var Dashboard = require('./Dashboard');
 var {
   AppRegistry,
   StyleSheet,
@@ -52,7 +52,7 @@ class Login extends React.Component {
           var token = `Token user_token="${response['user_token']}", user_email="${response['user_email']}"`
           AsyncStorage.setItem('@MatterhornNative:authentication',token).then(() => {
             this.props.navigator.replace({
-              component: ProjectsOverview,
+              component: Dashboard,
               passProps: {
                 authentication: token
               }

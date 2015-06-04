@@ -1,9 +1,13 @@
 'use strict';
 
 var React = require('react-native');
+
 var Feature = require('./Feature')
 var TicketFilter = require('./TicketFilter')
+
 var styles = require('../Styles/ProjectViewStyles');
+var header = require('../Styles/HeaderStyles');
+
 var {
   StyleSheet,
   Image,
@@ -13,7 +17,6 @@ var {
   Text,
   Component
 } = React;
-
 
 class ProjectView extends Component {
   constructor(props) {
@@ -42,8 +45,8 @@ class ProjectView extends Component {
   }
   renderHeader() {
     return (
-      <View style={[styles.headerContainer]}>
-        <Text style={[styles.header]}>{this.props.route.passProps.project.title}</Text>
+      <View style={header.container}>
+        <Text style={[header.headerText]}>{this.props.route.passProps.project.title}</Text>
       </View>
     )
   }

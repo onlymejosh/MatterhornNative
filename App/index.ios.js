@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var ProjectsOverview = require('./Components/ProjectsOverview');
+var Dashboard = require('./Components/Dashboard');
 var Login = require('./Components/Login');
 
 var {
@@ -53,7 +53,7 @@ class MatterhornNative extends React.Component {
 
 
   render() {
-    var component = this.state.authentication ? ProjectsOverview : Login;
+    var component = this.state.authentication ? Dashboard : Login;
     if (this.state.loaded) {
       return (
         <Navigator

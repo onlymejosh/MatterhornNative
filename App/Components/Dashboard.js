@@ -7,7 +7,7 @@ var SideMenu = require('react-native-side-menu');
 var api = require('../Utils/api.js');
 var ProjectView = require('./ProjectView');
 var Sidebar = require('./Sidebar');
-var styles = require('../Styles/ProjectsOverviewStyles');
+var styles = require('../Styles/Dashboard');
 var header = require('../Styles/HeaderStyles');
 
 var {
@@ -25,7 +25,7 @@ var URLS = {
   projects: 'http://0.0.0.0:3000/api/v1/projects'
 };
 
-class ProjectsOverview extends React.Component {
+class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +50,7 @@ class ProjectsOverview extends React.Component {
         <View style={{flex:1}}>
           {this.renderHeader()}
           <View style={{flex:1,paddingTop:0,backgroundColor:'#fff'}}>
-            <Text>TODO: Dashboard BRO</Text>
+            <Text>TODO:  BRO</Text>
           </View>
         </View>
       </SideMenu>
@@ -83,7 +83,7 @@ class ProjectsOverview extends React.Component {
             style={header.menuButton}
           />
         </TouchableHighlight>
-      <Text style={[header.headerText]}>{'Dashboard'}</Text>
+        <Text style={[header.headerText]}>{'Dashboard'}</Text>
       </View>
     )
   }
@@ -108,4 +108,4 @@ class ProjectsOverview extends React.Component {
   }
 }
 
-module.exports = ProjectsOverview
+module.exports = Dashboard

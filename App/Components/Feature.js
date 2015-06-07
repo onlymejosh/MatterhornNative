@@ -26,7 +26,7 @@ class Feature extends Component {
 
   renderTicket(ticket) {
     return (
-      <Ticket
+      <Ticket key={ticket.id}
         ticket={ticket} />
     )
   }

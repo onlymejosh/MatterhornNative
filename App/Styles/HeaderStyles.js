@@ -19,7 +19,6 @@ module.exports = StyleSheet.create({
     height: 50,
   },
   menuButton: {
-    color:'#F7F7F7',
     width: 40,
     height: 40,
   },

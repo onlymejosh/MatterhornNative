@@ -48,7 +48,7 @@ class ProjectView extends Component {
 
   renderFeature(feature) {
     return (
-      <Feature
+      <Feature key={feature.id}
         feature={feature}
         tickets={feature.tickets} />
     );

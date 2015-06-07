@@ -62,7 +62,7 @@ class Sidebar extends React.Component {
       backgroundColor:project.color
     };
     return (
-      <TouchableHighlight onPress={() => this.rowPressed(project.id)}
+      <TouchableHighlight key={project.id} onPress={() => this.rowPressed(project.id)}
           underlayColor='#dddddd'>
         <View style={styles.projectsList}>
           <View style={projectStyle}>

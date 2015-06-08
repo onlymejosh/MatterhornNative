@@ -11,7 +11,7 @@ var api = require('../Utils/api.js');
 var Header = require('./Header');
 var ProjectView = require('./ProjectView');
 var Sidebar = require('./Sidebar');
-var Ticket = require('./Ticket');
+var Agenda = require('./Agenda');
 
 var styles = require('../Styles/Dashboard');
 
@@ -56,50 +56,17 @@ class Dashboard extends React.Component {
           <Header onSideMenu={() => this.handleSidebar()}
                   title="Dashboard" />
           <View style={{flex:1,paddingTop:0,backgroundColor:'#fff'}}>
+            <Agenda
+              projects={this.state.projects}
+              features={this.state.features}
+              tickets={this.state.tickets}
+              navigator={this.props.navigator}>
+            </Agenda>
             <Text>TODO:  BRO</Text>
-            {this.renderTicketsForToday()}
           </View>
         </View>
       </SideMenu>
     );
-  }
-
-  // returns Array
-  // [{
-  //   ticket attributes...
-  //   project_title: 'OMG PROJECT',
-  //   project_id: 1,
-  // }]
-  renderTicketsForToday(){
-    var today = Moment().format('YYYY-MM-DD')
-    var tickets = this.state.tickets.filter(ticket => {
-      return ticket.due_date === today &&
-             ticket.state != 'completed' &&
-             ticket.assigned_member_id === 1
-    });
-    var ticketsForToday = tickets.map(ticket =>{
-      var feature = _.findWhere(this.state.features, {
-        id:ticket.feature_id
-      });
-      var project = _.findWhere(this.state.projects, {
-        id:feature.project_id
-      });
-      var feture = this.state.features
-      _.extend(ticket,{
-        project_title: project.title
-        project_id: project.id
-      });
-    });
-    return(
-      <View style={{}}>
-        {tickets.map((ticket) => this.renderTicket(ticket)) }
-      </View>
-    )
-  }
-
-  renderTicket(ticket) {
-    return (<Ticket key={ticket.id}
-      ticket={ticket} />)
   }
 
   renderLoadingView() {
@@ -118,10 +85,6 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchData('projects');
-  }
-
-  fetchData(model) {
     api.getProjects(this.props.route.passProps.authentication)
       .then((responseData) => {
         this.setState({

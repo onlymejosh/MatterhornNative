@@ -58,6 +58,7 @@ class MatterhornNative extends React.Component {
       return (
         <Navigator
           style={styles.navigator}
+          configureScene={() => Navigator.SceneConfigs.FadeAndroid}
           renderScene={this.renderScene}
           initialRoute={{
             component: component,

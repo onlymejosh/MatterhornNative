@@ -40,5 +40,13 @@ module.exports = StyleSheet.create({
     fontWeight:'bold',
     backgroundColor:'red',
   },
+  titleStyle: {
+    color:'#919191',
+    fontFamily:'Proxima Nova Soft',
+  },
+  selectedTitleStyle: {
+    color:'#9F87BE',
+    fontWeight: 'bold',
+  }
 
 });

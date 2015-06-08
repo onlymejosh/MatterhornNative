@@ -18,9 +18,9 @@ class TicketFilter extends Component {
     this.selected = this.props.selected || 'todo'
     this.state = {
       index:0,
-      filters: ["To Do", "In Progress", "Completed"],
-      filterValues: ["todo", "inprogress", "completed"]
     }
+    this.state.filters = this.props.filters || ["To Do", "In Progress", "Completed"]
+    this.state.filterValues = this.props.filterValues || ["todo", "inprogress", "completed"]
   }
 
   _onPressButton(index) {
@@ -32,11 +32,15 @@ class TicketFilter extends Component {
   render() {
 
     return (
-      <View>
+      <View style={{backgroundColor:'#F7F7F7'}}>
         <SegmentedView
             titles={this.state.filters}
             index={this.state.index}
             stretch
+            barColor={'#9F87BE'}
+            underlayColor={'#F7F7F7'}
+            titleStyle={styles.titleStyle}
+            selectedTitleStyle={styles.selectedTitleStyle}
             onPress={index => this._onPressButton({ index })}
         />
 

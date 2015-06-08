@@ -3,12 +3,18 @@
 var React = require('react-native');
 var Icon = require('FAKIconImage');
 var SideMenu = require('react-native-side-menu');
+var Moment = require('moment');
+var _ = require('../Utils/lodash.underscore.js');
 
 var api = require('../Utils/api.js');
+
+var Header = require('./Header');
 var ProjectView = require('./ProjectView');
 var Sidebar = require('./Sidebar');
+var Ticket = require('./Ticket');
+
 var styles = require('../Styles/Dashboard');
-var Header = require('./Header');
+
 
 var {
   AppRegistry,
@@ -20,10 +26,6 @@ var {
   ActivityIndicatorIOS,
   Component
 } = React;
-
-var URLS = {
-  projects: 'http://0.0.0.0:3000/api/v1/projects'
-};
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -37,10 +39,13 @@ class Dashboard extends React.Component {
     if (!this.state.loaded) {
       return this.renderLoadingView();
     }
+
     var menu = <Sidebar projects={this.state.projects}
                         features={this.state.features}
                         tickets={this.state.tickets}
                         navigator={this.props.navigator}></Sidebar>
+
+
     return (
       <SideMenu menu={menu}
                 touchToClose={true}
@@ -52,10 +57,49 @@ class Dashboard extends React.Component {
                   title="Dashboard" />
           <View style={{flex:1,paddingTop:0,backgroundColor:'#fff'}}>
             <Text>TODO:  BRO</Text>
+            {this.renderTicketsForToday()}
           </View>
         </View>
       </SideMenu>
     );
+  }
+
+  // returns Array
+  // [{
+  //   ticket attributes...
+  //   project_title: 'OMG PROJECT',
+  //   project_id: 1,
+  // }]
+  renderTicketsForToday(){
+    var today = Moment().format('YYYY-MM-DD')
+    var tickets = this.state.tickets.filter(ticket => {
+      return ticket.due_date === today &&
+             ticket.state != 'completed' &&
+             ticket.assigned_member_id === 1
+    });
+    var ticketsForToday = tickets.map(ticket =>{
+      var feature = _.findWhere(this.state.features, {
+        id:ticket.feature_id
+      });
+      var project = _.findWhere(this.state.projects, {
+        id:feature.project_id
+      });
+      var feture = this.state.features
+      _.extend(ticket,{
+        project_title: project.title
+        project_id: project.id
+      });
+    });
+    return(
+      <View style={{}}>
+        {tickets.map((ticket) => this.renderTicket(ticket)) }
+      </View>
+    )
+  }
+
+  renderTicket(ticket) {
+    return (<Ticket key={ticket.id}
+      ticket={ticket} />)
   }
 
   renderLoadingView() {

@@ -92,8 +92,6 @@ class ProjectView extends Component {
             />
         </View>
       </SideMenu>
-
-
     );
   }
 };

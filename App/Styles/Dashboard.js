@@ -9,10 +9,22 @@ var {
 
 module.exports = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    flex:1,
+    backgroundColor: '#DCDCDC',
   },
+  agendaHeader: {
+    backgroundColor:'#9F88BE',
+    padding:10,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+  },
+  headerText: {
+    color:'#F7F7F7',
+    fontFamily: 'Proxima Nova',
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  projectContainer: {
+    margin:10,
+  }
 });

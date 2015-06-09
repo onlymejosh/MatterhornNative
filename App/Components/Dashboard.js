@@ -22,6 +22,7 @@ var {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   TouchableHighlight,
   ActivityIndicatorIOS,
   Component
@@ -52,18 +53,17 @@ class Dashboard extends React.Component {
                 disableGestures={true}
                 openMenuOffset={'300'}
                 ref="sideMenu">
-        <View style={{flex:1}}>
+        <View style={{flex:1, backgroundColor:'#DCDCDC'}}>
           <Header onSideMenu={() => this.handleSidebar()}
                   title="Dashboard" />
-          <View style={{flex:1,paddingTop:0,backgroundColor:'#fff'}}>
+          <ScrollView style={{flex:1,paddingTop:0}}>
             <Agenda
               projects={this.state.projects}
               features={this.state.features}
               tickets={this.state.tickets}
               navigator={this.props.navigator}>
             </Agenda>
-            <Text>TODO:  BRO</Text>
-          </View>
+          </ScrollView>
         </View>
       </SideMenu>
     );

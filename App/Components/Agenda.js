@@ -5,7 +5,7 @@ var Moment = require('moment');
 var _ = require('../Utils/lodash.underscore.js');
 
 var ProjectView = require('./ProjectView');
-var Ticket = require('./Ticket');
+var TodoTicket = require('./TodoTicket');
 
 var styles = require('../Styles/Dashboard');
 
@@ -51,7 +51,7 @@ class Agenda extends React.Component {
     });
 
     return(
-      <View style={{}}>
+      <View style={styles.container}>
         {data}
       </View>
     )
@@ -59,8 +59,10 @@ class Agenda extends React.Component {
 
   renderProjectWithTickets(projectTitle,tickets) {
     return (
-      <View>
-        <Text>{projectTitle}</Text>
+      <View style={styles.projectContainer}>
+        <View style={styles.agendaHeader}>
+          <Text style={styles.headerText}>{projectTitle}</Text>
+        </View>
         <View>
           {tickets.map((ticket) => this.renderTicket(ticket)) }
         </View>
@@ -70,12 +72,7 @@ class Agenda extends React.Component {
 
   renderTicket(ticket) {
     return (
-      <Ticket key={ticket.id} ticket={ticket}></Ticket>
-      // <View key={ticket.id}>
-      //   <Text style={styles.ticketTitle}>
-      //     {ticket.title}
-      //   </Text>
-      // </View>
+      <TodoTicket key={ticket.id} ticket={ticket} style={styles.todoTicket}></TodoTicket>
     );
   }
 

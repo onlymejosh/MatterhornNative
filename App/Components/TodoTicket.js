@@ -24,12 +24,13 @@ class TodoTicket extends Component {
           <View style={{alignItems:'center',}}>
             <TouchableHighlight
               onPress={() => this.handleTicketState()}
-              underlayColor={'#B2D171'}>
+              underlayColor={'#B2D171'}
+              style={{backgroundColor:'#DCDCDC',borderRadius: 4,}}>
               <Icon
                 name='fontawesome|check'
                 size={20}
                 color={'#F7F7F7'}
-                style={{width: 30,height: 30,backgroundColor:'#DCDCDC',borderRadius: 4,}}
+                style={{width: 30,height: 30,borderRadius: 4,}}
               />
             </TouchableHighlight>
           </View>

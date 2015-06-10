@@ -33,7 +33,7 @@ class TodoTicket extends Component {
     var completeStyle = {
       backgroundColor:'#B2D171'
     }
-    var ticketStyle = this.state.ticketState ? completeStyle : todoStyle
+    var ticketStyle = this.state.completed ? completeStyle : todoStyle
     return (
       <View style={[ticketStyles.ticket,styles.ticket]}>
         <View style={[ticketStyles.leftContainer,styles.leftContainer]}>

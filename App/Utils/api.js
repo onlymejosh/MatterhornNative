@@ -22,6 +22,21 @@ var api = {
         'Authorization':authentication
       }
     }).then((response) => response.json())
+  },
+
+  setTicketState(authentication, ticket,state) {
+    return fetch(URLS.projects,{
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization':authentication
+      },
+      method: 'PUT',
+      body: JSON.stringify({state: state})
+    }).then((response) => {
+      console.log(response);
+      response.json()
+    })
   }
 };
 

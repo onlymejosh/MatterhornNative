@@ -12,15 +12,15 @@ var {
   Component
 } = React;
 
-class TicketFilter extends Component {
+class FilterView extends Component {
   constructor(props) {
     super(props);
     this.selected = this.props.selected || 'todo'
     this.state = {
-      index:0,
-    }
-    this.state.filters = this.props.filters || ["To Do", "In Progress", "Completed"]
-    this.state.filterValues = this.props.filterValues || ["todo", "inprogress", "completed"]
+      index: this.props.index || 0,
+      filters: this.props.filters || ["To Do", "In Progress", "Completed"],
+      filterValues: this.props.filterValues || ["todo", "inprogress", "completed"]
+    };
   }
 
   _onPressButton(index) {
@@ -50,4 +50,4 @@ class TicketFilter extends Component {
   }
 }
 
-module.exports = TicketFilter;
+module.exports = FilterView;

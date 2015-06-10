@@ -11,6 +11,7 @@ var api = require('../Utils/api.js');
 
 var Header = require('./Header');
 var ProjectView = require('./ProjectView');
+var FilterView = require('./FilterView');
 var Sidebar = require('./Sidebar');
 var Agenda = require('./Agenda');
 
@@ -33,7 +34,10 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false
+      loaded: false,
+      filterViewIndex:1,
+      filters: ['Notifications','Agenda','Activity Feed'],
+      filterValues: ['notifications','agenda','activityFeed'],
     }
   }
 
@@ -46,8 +50,6 @@ class Dashboard extends React.Component {
                         features={this.state.features}
                         tickets={this.state.tickets}
                         navigator={this.props.navigator}></Sidebar>
-
-
     return (
       <SideMenu menu={menu}
                 touchToClose={true}
@@ -55,21 +57,14 @@ class Dashboard extends React.Component {
                 openMenuOffset={'300'}
                 ref="sideMenu">
         <View style={{flex:1, backgroundColor:'#DCDCDC'}}>
-          <Header onSideMenu={() => this.handleSidebar()}
-                  title="Dashboard" />
+          <Header onSideMenu={() => this.handleSidebar()} title="Dashboard" />
+          <FilterView
+            index={this.state.filterViewIndex}
+            filters={this.state.filters}
+            filterValues={this.state.filterValues}
+            onClick={() => console.log(this)}
+          />
           <ScrollView style={{flex:1,paddingTop:0}}>
-            <View style={{backgroundColor:'#F7F7F7'}}>
-              <SegmentedView
-                  titles={['Notifications','Agenda','Activity Feed']}
-                  index={1}
-                  stretch
-                  barColor={'#9F87BE'}
-                  underlayColor={'#F7F7F7'}
-                  titleStyle={filterStyles.titleStyle}
-                  selectedTitleStyle={filterStyles.selectedTitleStyle}
-                  onPress={index => console.log({ index })}
-              />
-            </View>
             <Agenda
               projects={this.state.projects}
               features={this.state.features}

@@ -4,7 +4,7 @@ var React = require('react-native');
 var SideMenu = require('react-native-side-menu');
 
 var Feature = require('./Feature')
-var TicketFilter = require('./TicketFilter')
+var FilterView = require('./FilterView')
 var Header = require('./Header');
 
 var styles = require('../Styles/ProjectViewStyles');
@@ -83,8 +83,7 @@ class ProjectView extends Component {
           <Header onSideMenu={() => this.handleSidebar()}
                   title={this.props.route.passProps.project.title} />
 
-          <TicketFilter
-            onClick={this.handleState.bind(this)}/>
+          <FilterView onClick={this.handleState.bind(this)}/>
           <ListView
             style={styles.listView}
             dataSource={this.state.features}

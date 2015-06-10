@@ -3,6 +3,7 @@
 var React = require('react-native');
 var Icon = require('FAKIconImage');
 var SideMenu = require('react-native-side-menu');
+var SegmentedView = require('react-native-segmented-view')
 var Moment = require('moment');
 var _ = require('../Utils/lodash.underscore.js');
 
@@ -14,7 +15,7 @@ var Sidebar = require('./Sidebar');
 var Agenda = require('./Agenda');
 
 var styles = require('../Styles/Dashboard');
-
+var filterStyles = require('../Styles/TicketFilterStyles');
 
 var {
   AppRegistry,
@@ -57,6 +58,18 @@ class Dashboard extends React.Component {
           <Header onSideMenu={() => this.handleSidebar()}
                   title="Dashboard" />
           <ScrollView style={{flex:1,paddingTop:0}}>
+            <View style={{backgroundColor:'#F7F7F7'}}>
+              <SegmentedView
+                  titles={['Notifications','Agenda','Activity Feed']}
+                  index={1}
+                  stretch
+                  barColor={'#9F87BE'}
+                  underlayColor={'#F7F7F7'}
+                  titleStyle={filterStyles.titleStyle}
+                  selectedTitleStyle={filterStyles.selectedTitleStyle}
+                  onPress={index => console.log({ index })}
+              />
+            </View>
             <Agenda
               projects={this.state.projects}
               features={this.state.features}

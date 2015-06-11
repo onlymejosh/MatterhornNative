@@ -4,7 +4,7 @@ var React = require('react-native');
 var ticketStyles = require('../Styles/TicketStyles');
 var styles = require('../Styles/TodoTicket');
 var Icon = require('FAKIconImage');
-
+var TicketView = require('./TicketView');
 var {
   AppRegistry,
   StyleSheet,
@@ -25,6 +25,16 @@ class TodoTicket extends Component {
   handleTicketState() {
     this.setState({completed: !this.state.completed})
   }
+  gotoTicket() {
+    this.props.navigator.push({
+      title: this.props.ticket.title,
+      component: TicketView,
+      passProps: {
+        projects:this.props.projects,
+        ticket: this.props.ticket
+      },
+    });
+  }
   render() {
     var ticket = this.props.ticket;
     var todoStyle = {
@@ -35,6 +45,9 @@ class TodoTicket extends Component {
     }
     var ticketStyle = this.state.completed ? completeStyle : todoStyle
     return (
+      <TouchableHighlight
+        onPress={() => {this.gotoTicket()}}
+        underlayColor='#dddddd'>
       <View style={[ticketStyles.ticket,styles.ticket]}>
         <View style={[ticketStyles.leftContainer,styles.leftContainer]}>
           <View style={{alignItems:'center',}}>
@@ -57,6 +70,7 @@ class TodoTicket extends Component {
           </Text>
         </View>
       </View>
+      </TouchableHighlight>
     );
   }
 

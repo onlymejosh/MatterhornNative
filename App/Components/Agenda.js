@@ -16,7 +16,6 @@ var {
   Text,
   View,
   TouchableHighlight,
-  ActivityIndicatorIOS,
   Component
 } = React;
 
@@ -59,7 +58,7 @@ class Agenda extends React.Component {
 
   renderProjectWithTickets(projectTitle,tickets) {
     return (
-      <View style={styles.projectContainer}>
+      <View style={styles.projectContainer} key={projectTitle}>
         <View style={styles.agendaHeader}>
           <Text style={styles.headerText}>{projectTitle}</Text>
         </View>
@@ -72,8 +71,25 @@ class Agenda extends React.Component {
 
   renderTicket(ticket) {
     return (
-      <TodoTicket key={ticket.id} ticket={ticket} style={styles.todoTicket}></TodoTicket>
+      <TodoTicket key={ticket.id}
+                  ticket={ticket}
+                  style={styles.todoTicket}
+                  navigator={this.props.navigator}></TodoTicket>
     );
+  }
+
+  handleTicket(ticket) {
+    this.props.navigator.push({
+      title: ticket.title,
+      component: TicketView,
+      passProps: {
+        projects:this.props.projects,
+        project: project,
+        features: features,
+        tickets: this.props.tickets,
+        ticket: ticket
+      },
+    });
   }
 
 }

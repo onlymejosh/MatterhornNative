@@ -38,6 +38,7 @@ class FilterView extends Component {
             index={this.state.index}
             stretch
             barColor={'#9F87BE'}
+            barPosition={'bottom'}
             underlayColor={'#F7F7F7'}
             titleStyle={styles.titleStyle}
             selectedTitleStyle={styles.selectedTitleStyle}

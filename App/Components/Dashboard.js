@@ -5,7 +5,7 @@ var Icon = require('FAKIconImage');
 var SideMenu = require('react-native-side-menu');
 var SegmentedView = require('react-native-segmented-view')
 var Moment = require('moment');
-var _ = require('../Utils/lodash.underscore.js');
+var _ = require('lodash');
 
 var api = require('../Utils/api.js');
 

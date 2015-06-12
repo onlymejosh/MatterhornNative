@@ -2,7 +2,7 @@
 
 var React = require('react-native');
 var Moment = require('moment');
-var _ = require('../Utils/lodash.underscore.js');
+var _ = require('lodash');
 
 var ProjectView = require('./ProjectView');
 var TodoTicket = require('./TodoTicket');

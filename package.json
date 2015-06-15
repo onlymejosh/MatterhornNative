@@ -10,10 +10,12 @@
     "react-native-icons": "0.0.8",
     "react-native-keyboardevents": "^0.3.5",
     "react-native-navbar": "^0.5.0",
-    "react-native-segmented-view": "^1.0.1",
+    "react-native-segmented-view": "git@github.com:onlymejosh/react-native-segmented-view.git#allow_placement_of_bar",
     "react-native-side-menu": "^0.8.0",
     "tcomb": "^1.0.3",
     "tcomb-form-native": "^0.1.8",
-    "tcomb-validation": "^1.0.4"
+    "tcomb-validation": "^1.0.4",
+    "moment":"2.10.3",
+    "lodash":"3.9.3"
   }
 }

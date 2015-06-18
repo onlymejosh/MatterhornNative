@@ -2,8 +2,15 @@
 
 var React = require('react-native');
 var Icon = require('FAKIconImage');
+var SideMenu = require('react-native-side-menu');
+
 var Header = require('./Header');
+
+var Field = require('./Field');
 var styles = require('../Styles/TicketView');
+
+var KeyboardEvents = require('react-native-keyboardevents');
+var KeyboardEventEmitter = KeyboardEvents.Emitter;
 
 var {
   StyleSheet,
@@ -11,6 +18,8 @@ var {
   ScrollView,
   View,
   Text,
+  TextInput,
+  TouchableOpacity,
   Component
 } = React;
 
@@ -19,15 +28,50 @@ class TicketView extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      keyboardSpace: 0,
+      comment:''
+    };
+
+    this.updateKeyboardSpace = this.updateKeyboardSpace.bind(this);
+    this.resetKeyboardSpace = this.resetKeyboardSpace.bind(this);
   }
 
+  updateKeyboardSpace(frames) {
+    this.setState({keyboardSpace: frames.end.height + 26});
+  }
+
+  resetKeyboardSpace() {
+    this.setState({keyboardSpace: 0});
+  }
+
+  componentDidMount() {
+    KeyboardEventEmitter.on(KeyboardEvents.KeyboardDidShowEvent, this.updateKeyboardSpace);
+    KeyboardEventEmitter.on(KeyboardEvents.KeyboardWillHideEvent, this.resetKeyboardSpace);
+  }
+
+  componentWillUnmount() {
+    KeyboardEventEmitter.off(KeyboardEvents.KeyboardDidShowEvent, this.updateKeyboardSpace);
+    KeyboardEventEmitter.off(KeyboardEvents.KeyboardWillHideEvent, this.resetKeyboardSpace);
+  }
+
+  _onSubmitComment() {
+    // Save the comment.
+    this.setState({comment:''});
+    this.refs.commentBox.blur();
+  }
   render() {
     var ticket = this.props.route.passProps.ticket;
+    var menu = <View></View>
     return (
-      <View>
-        <Header onSideMenu={() => console.log()} title="Dashboard"></Header>
+      <SideMenu menu={menu}
+                touchToClose={true}
+                disableGestures={true}
+                openMenuOffset={'300'}
+                ref="sideMenu">
         <View style={styles.container}>
-          <View style={styles.fieldContainer}>
+          <Header onSideMenu={() => console.log()} title="Dashboard"></Header>
+          <Field>
             <Text style={[styles.label,{paddingLeft:5, paddingTop:5,paddingRight:5}]}>Feature</Text>
             <View style={styles.featureDropdown}>
               <Text style={[styles.label]}>Tickets</Text>
@@ -38,8 +82,9 @@ class TicketView extends Component {
                   style={{width: 15,height: 15,position:'absolute',top:4,right:10}}
                 />
             </View>
-          </View>
-          <View style={styles.fieldContainer}>
+          </Field>
+
+          <Field>
             <View style={[styles.featureDropdown,{marginRight:2}]}>
               <Text style={[styles.label]}>Other</Text>
                 <Icon
@@ -58,9 +103,9 @@ class TicketView extends Component {
                   style={{width: 15,height: 15,position:'absolute',top:4,right:10}}
                 />
             </View>
-          </View>
+          </Field>
 
-          <View style={styles.fieldContainer}>
+          <Field>
             <View style={[styles.featureDropdown,{marginRight:2}]}>
               <Text style={[styles.label]}>Inprogress</Text>
                 <Icon
@@ -90,12 +135,29 @@ class TicketView extends Component {
                 </View>
               </View>
             </View>
-          </View>
-          <View style={styles.fieldContainer}>
+          </Field>
+
+          <Field>
             <Text style={styles.ticketTitle}>#{ticket.local_id} {ticket.title}</Text>
+            <Text style={styles.ticketDescription}>{ticket.description}</Text>
+          </Field>
+
+          <View style={styles.keyboardContainer}>
+            <TextInput
+              ref="commentBox"
+              style={styles.textbox}
+              keyboardType={'twitter'}
+              onChangeText={(text) => this.setState({comment: text})}
+              value={this.state.comment} />
+            <TouchableOpacity onPress={() => this._onSubmitComment()}>
+              <Text style={styles.sendButton}>Send</Text>
+            </TouchableOpacity>
+            <View style={{height: this.state.keyboardSpace, backgroundColor:'#000'}}></View>
           </View>
+
+
         </View>
-      </View>
+      </SideMenu>
     );
   }
 };

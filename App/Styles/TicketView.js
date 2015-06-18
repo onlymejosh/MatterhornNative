@@ -6,19 +6,15 @@ var {
   StyleSheet,
 } = React;
 
+var INPUT_COLOR = '#000000';
+var BORDER_COLOR = '#cccccc';
+var FONT_SIZE = 12;
+var FONT_WEIGHT = '500';
+
 
 module.exports = StyleSheet.create({
   container: {
     flex:1,
-  },
-  fieldContainer: {
-    flex:1,
-    flexDirection: 'row',
-    padding:5,
-    paddingTop:8,
-    paddingBottom:8,
-    borderBottomWidth:1,
-    borderColor:'#f2f2f2',
   },
   label: {
     color: '#666',
@@ -34,7 +30,6 @@ module.exports = StyleSheet.create({
     borderWidth:1,
     borderColor:'#dcdcdc',
     flex:1,
-    fontWeight:'normal'
   },
 
   sizingContainer: {
@@ -62,5 +57,39 @@ module.exports = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 2,
+  },
+  ticketDescription: {
+    color: '#4a4c5a',
+    fontFamily:'Proxima Nova',
+    fontSize: 14,
+    fontWeight: 'normal',
+    marginBottom: 2,
+  },
+  keyboardContainer: {
+    flexDirection:'row',
+    bottom:0,
+    left:0,
+    right:0,
+    padding:3,
+    position:'absolute',
+    backgroundColor:'#eee'
+  },
+  textbox: {
+    flex:1,
+    height: 26,
+    borderWidth: 0.5,
+    borderRadius:3,
+    borderColor: '#c3c3c3',
+    backgroundColor:'#fff',
+    fontSize: 13,
+    padding: 4,
+  },
+  sendButton: {
+    // alignSelf:'center',
+    padding:5,
+    fontFamily:'Proxima Nova',
+    fontSize: 13,
+    fontWeight: 'bold',
+    color:'#A188BB'
   }
 });

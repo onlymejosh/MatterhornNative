@@ -22,6 +22,7 @@
 		038329571B20525D00DE760F /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 038329561B20525D00DE760F /* FontAwesome.otf */; };
 		03C9BB991B15D65B0033E644 /* ProximaNovaSoft-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03C9BB8B1B15D5970033E644 /* ProximaNovaSoft-Bold.otf */; };
 		03C9BB9A1B15D65E0033E644 /* ProximaNovaSoft-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03C9BB8C1B15D5970033E644 /* ProximaNovaSoft-Regular.otf */; };
+		03DD36781B3120E0007F658F /* libRNKeyboardEvents.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03DD36771B311E77007F658F /* libRNKeyboardEvents.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -90,6 +91,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 2F5A3EB81ACDBF8000439386;
 			remoteInfo = ReactNativeIcons;
+		};
+		03DD36761B311E77007F658F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03DD36661B311E77007F658F /* RNKeyboardEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F12AFB9B1ADAF8F800E0535D;
+			remoteInfo = RNKeyboardEvents;
 		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -162,6 +170,7 @@
 		038329561B20525D00DE760F /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.otf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/FontAwesome.otf"; sourceTree = "<group>"; };
 		03C9BB8B1B15D5970033E644 /* ProximaNovaSoft-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaSoft-Bold.otf"; sourceTree = "<group>"; };
 		03C9BB8C1B15D5970033E644 /* ProximaNovaSoft-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaSoft-Regular.otf"; sourceTree = "<group>"; };
+		03DD36661B311E77007F658F /* RNKeyboardEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNKeyboardEvents.xcodeproj; path = "node_modules/react-native-keyboardevents/RNKeyboardEvents.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* MatterhornNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatterhornNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +212,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				038329351B20501E00DE760F /* libReactNativeIcons.a in Frameworks */,
+				03DD36781B3120E0007F658F /* libRNKeyboardEvents.a in Frameworks */,
 				2EA3C3F14157734A29C8627F /* libPods-MatterhornNative.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,6 +345,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		03DD36671B311E77007F658F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				03DD36771B311E77007F658F /* libRNKeyboardEvents.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		139105B71AF99BAD00B5F7CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,6 +414,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				03DD36661B311E77007F658F /* RNKeyboardEvents.xcodeproj */,
 				0383292F1B20500200DE760F /* ReactNativeIcons.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -561,6 +580,10 @@
 					ProductGroup = 038329301B20500200DE760F /* Products */;
 					ProjectRef = 0383292F1B20500200DE760F /* ReactNativeIcons.xcodeproj */;
 				},
+				{
+					ProductGroup = 03DD36671B311E77007F658F /* Products */;
+					ProjectRef = 03DD36661B311E77007F658F /* RNKeyboardEvents.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -618,6 +641,13 @@
 			fileType = archive.ar;
 			path = libReactNativeIcons.a;
 			remoteRef = 038329331B20500200DE760F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		03DD36771B311E77007F658F /* libRNKeyboardEvents.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNKeyboardEvents.a;
+			remoteRef = 03DD36761B311E77007F658F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		139105C11AF99BAD00B5F7CC /* libRCTSettings.a */ = {

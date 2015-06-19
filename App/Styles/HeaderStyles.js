@@ -20,7 +20,7 @@ module.exports = StyleSheet.create({
   },
   menuButton: {
     width: 40,
-    height: 40,
+    height: 30,
   },
   headerText: {
     flex:1,

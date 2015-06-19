@@ -26,16 +26,16 @@ class Agenda extends React.Component {
 
   render(){
     var today = Moment().format('YYYY-MM-DD')
-    var tickets = this.props.tickets.filter(ticket => {
+    var tickets = this.props.store.tickets.filter(ticket => {
       return ticket.due_date === today &&
              ticket.state != 'completed' &&
              ticket.assigned_member_id === 1
     });
     var ticketsForToday = tickets.map(ticket =>{
-      var feature = _.findWhere(this.props.features, {
+      var feature = _.findWhere(this.props.store.features, {
         id:ticket.feature_id
       });
-      var project = _.findWhere(this.props.projects, {
+      var project = _.findWhere(this.props.store.projects, {
         id:feature.project_id
       });
       return _.extend(ticket,{
@@ -77,21 +77,6 @@ class Agenda extends React.Component {
                   navigator={this.props.navigator}></TodoTicket>
     );
   }
-
-  handleTicket(ticket) {
-    this.props.navigator.push({
-      title: ticket.title,
-      component: TicketView,
-      passProps: {
-        projects:this.props.projects,
-        project: project,
-        features: features,
-        tickets: this.props.tickets,
-        ticket: ticket
-      },
-    });
-  }
-
 }
 
 module.exports = Agenda

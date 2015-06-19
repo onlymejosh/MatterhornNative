@@ -7,6 +7,7 @@ var SegmentedView = require('react-native-segmented-view')
 var Moment = require('moment');
 var _ = require('lodash');
 
+var Store = require('../Stores/Matterhorn');
 var api = require('../Utils/api.js');
 
 var Header = require('./Header');
@@ -46,9 +47,9 @@ class Dashboard extends React.Component {
       return this.renderLoadingView();
     }
 
-    var menu = <Sidebar projects={this.state.projects}
-                        features={this.state.features}
-                        tickets={this.state.tickets}
+    var menu = <Sidebar projects={this.state.store.projects}
+                        features={this.state.store.features}
+                        tickets={this.state.store.tickets}
                         navigator={this.props.navigator}></Sidebar>
     return (
       <SideMenu menu={menu}
@@ -66,9 +67,7 @@ class Dashboard extends React.Component {
           />
           <ScrollView style={{flex:1,paddingTop:0}}>
             <Agenda
-              projects={this.state.projects}
-              features={this.state.features}
-              tickets={this.state.tickets}
+              store={this.state.store}
               navigator={this.props.navigator}>
             </Agenda>
           </ScrollView>
@@ -95,10 +94,17 @@ class Dashboard extends React.Component {
   componentDidMount() {
     api.getProjects(this.props.route.passProps.authentication)
       .then((responseData) => {
-        this.setState({
+        // This is a really backwards way of building a store
+        // It feels like I'm reinventing the wheel to do this.
+        // Alt looks like the better alternative.
+        var tempStore = new Store({
           projects:responseData.projects,
           features:responseData.features,
           tickets:responseData.tickets,
+        });
+        
+        this.setState({
+          store: tempStore,
           loaded: true,
         });
       })

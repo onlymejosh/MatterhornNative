@@ -70,7 +70,10 @@ class TicketView extends Component {
                 openMenuOffset={'300'}
                 ref="sideMenu">
         <View style={styles.container}>
-          <Header onSideMenu={() => console.log()} title="Dashboard"></Header>
+          <Header onSideMenu={() => console.log()}
+                  title={`#${ticket.local_id} ${ticket.title}`}
+                  iconName="arrow-left"
+                  iconSize={15}></Header>
           <Field>
             <Text style={[styles.label,{paddingLeft:5, paddingTop:5,paddingRight:5}]}>Feature</Text>
             <View style={styles.featureDropdown}>

@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var SideMenu = require('react-native-side-menu');
+var Store = require('../Stores/Matterhorn');
 
 var Feature = require('./Feature')
 var FilterView = require('./FilterView')
@@ -39,6 +40,7 @@ class ProjectView extends Component {
     }
     // this.state.features = this.state.features.cloneWithRows(features)
     this.state.unFilteredFeatures = JSON.parse(JSON.stringify(features));
+    console.log(Store.projects);
   }
 
   componentWillMount() {

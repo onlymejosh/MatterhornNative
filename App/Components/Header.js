@@ -10,7 +10,7 @@ var {
   Image,
   Text,
   View,
-  TouchableHighlight,
+  TouchableOpacity,
   Component
 } = React;
 
@@ -26,18 +26,31 @@ class Header extends React.Component {
   render() {
     return (
       <View style={header.container}>
-        <TouchableHighlight onPress={() => this.handleSidebar()}>
+        <TouchableOpacity onPress={() => this.handleSidebar()}>
           <Icon
-            name='fontawesome|bars'
-            size={30}
+            name={`fontawesome|${this.props.iconName}`}
+            size={this.props.iconSize}
             color={'#F7F7F7'}
             style={header.menuButton}
           />
-        </TouchableHighlight>
+      </TouchableOpacity>
         <Text style={[header.headerText]}>{this.props.title}</Text>
       </View>
     )
   }
 }
+
+Header.propTypes = {
+  iconName: React.PropTypes.string,
+  iconSize: React.PropTypes.number,
+  onPress: React.PropTypes.func,
+}
+
+Header.defaultProps = {
+  iconName: 'bars',
+  iconSize: 30,
+  onPress: function noop() {},
+};
+
 
 module.exports = Header

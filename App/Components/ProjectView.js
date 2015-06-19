@@ -43,7 +43,7 @@ class ProjectView extends Component {
 
   componentWillMount() {
     // set the initial state of the tickets
-    this.handleState('todo');
+    this.handleState(this.props.defaultState);
   }
 
   renderFeature(feature) {
@@ -81,7 +81,7 @@ class ProjectView extends Component {
           <Header onSideMenu={() => this.handleSidebar()}
                   title={this.props.route.passProps.project.title} />
 
-          <FilterView onClick={this.handleState.bind(this)}/>
+          <FilterView index={1} onClick={this.handleState.bind(this)}/>
           <ListView
             style={styles.listView}
             dataSource={this.state.features}
@@ -91,6 +91,10 @@ class ProjectView extends Component {
       </SideMenu>
     );
   }
+};
+
+ProjectView.defaultProps = {
+  defaultState: 'inprogress',
 };
 
 module.exports = ProjectView;

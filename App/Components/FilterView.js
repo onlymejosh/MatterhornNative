@@ -15,12 +15,6 @@ var {
 class FilterView extends Component {
   constructor(props) {
     super(props);
-    this.selected = this.props.selected || 'todo'
-    this.state = {
-      index: this.props.index || 0,
-      filters: this.props.filters || ["To Do", "In Progress", "Completed"],
-      filterValues: this.props.filterValues || ["todo", "inprogress", "completed"]
-    };
   }
 
   _onPressButton(index) {
@@ -34,8 +28,8 @@ class FilterView extends Component {
     return (
       <View style={{backgroundColor:'#F7F7F7'}}>
         <SegmentedView
-            titles={this.state.filters}
-            index={this.state.index}
+            titles={this.props.filters}
+            index={this.props.index}
             stretch
             barColor={'#9F87BE'}
             barPosition={'bottom'}
@@ -51,4 +45,9 @@ class FilterView extends Component {
   }
 }
 
+FilterView.defaultProps = {
+  index: 0,
+  filters: ["To Do", "In Progress", "Completed"],
+  filterValues: ["todo", "inprogress", "completed"]
+};
 module.exports = FilterView;

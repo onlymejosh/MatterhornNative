@@ -73,6 +73,7 @@ class Agenda extends React.Component {
     return (
       <TodoTicket key={ticket.id}
                   ticket={ticket}
+                  store={this.props.store}
                   style={styles.todoTicket}
                   navigator={this.props.navigator}></TodoTicket>
     );

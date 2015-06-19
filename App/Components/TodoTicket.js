@@ -30,7 +30,7 @@ class TodoTicket extends Component {
       title: this.props.ticket.title,
       component: TicketView,
       passProps: {
-        projects:this.props.projects,
+        store:this.props.store,
         ticket: this.props.ticket
       },
     });

@@ -1,10 +1,14 @@
 'use strict';
 
 var React = require('react-native');
+var _ = require('lodash');
+
 var Icon = require('FAKIconImage');
 var SideMenu = require('react-native-side-menu');
 
+// Components
 var Header = require('./Header');
+var ProjectView = require('./ProjectView');
 
 var Field = require('./Field');
 var styles = require('../Styles/TicketView');
@@ -60,6 +64,30 @@ class TicketView extends Component {
     this.setState({comment:''});
     this.refs.commentBox.blur();
   }
+  // TODO: Use action
+  _handleBack(){
+    var ticket = this.props.route.passProps.ticket;
+    var store = this.props.route.passProps.store;
+    var feature = _.findWhere(store.features, {
+      id:ticket.feature_id
+    });
+    var project = _.findWhere(store.projects, {
+      id:feature.project_id
+    });
+    var features = store.features
+      .filter(feature => feature.project_id === project.id);
+    this.props.navigator.push({
+      title: project.title,
+      component: ProjectView,
+
+      passProps: {
+        store: store,
+        project: project,
+        features: features,
+        defaultState:ticket.state,
+      },
+    });
+  }
   render() {
     var ticket = this.props.route.passProps.ticket;
     var menu = <View></View>
@@ -70,7 +98,7 @@ class TicketView extends Component {
                 openMenuOffset={'300'}
                 ref="sideMenu">
         <View style={styles.container}>
-          <Header onSideMenu={() => console.log()}
+          <Header onSideMenu={() => this._handleBack()}
                   title={`#${ticket.local_id} ${ticket.title}`}
                   iconName="arrow-left"
                   iconSize={15}></Header>

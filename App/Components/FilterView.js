@@ -19,7 +19,7 @@ class FilterView extends Component {
 
   _onPressButton(index) {
     this.setState({index: index.index})
-    this.props.onClick(this.state.filterValues[index.index])
+    this.props.onClick(this.props.filterValues[index.index])
   }
 
 

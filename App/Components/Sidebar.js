@@ -44,7 +44,7 @@ class Sidebar extends React.Component {
         </View>
         <View style={[styles.projectsContainer,{paddingTop:0,marginBottom:12}]}>
           <ScrollView style={{height:550, backgroundColor:'#4A4C59',marginLeft:-13,marginRight:-13}}>
-            {this.props.projects.map((project) => this.renderProject(project))}
+            {this.props.store.projects.map((project) => this.renderProject(project))}
           </ScrollView>
         </View>
       </View>
@@ -76,20 +76,20 @@ class Sidebar extends React.Component {
     );
   }
 
+  // TODO: make this an action
   rowPressed(id) {
-    var project = this.props.projects
+    var project = this.props.store.projects
       .filter(project => project.id === id)[0];
-    var features = this.props.features
+    var features = this.props.store.features
       .filter(feature => feature.project_id === project.id);
     this.props.menuActions.close();
     this.props.navigator.push({
       title: project.title,
       component: ProjectView,
       passProps: {
-        projects:this.props.projects,
+        store: this.props.store,
         project: project,
         features: features,
-        tickets: this.props.tickets
       },
     });
   }

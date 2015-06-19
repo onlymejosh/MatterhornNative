@@ -2,7 +2,6 @@
 
 var React = require('react-native');
 var SideMenu = require('react-native-side-menu');
-var Store = require('../Stores/Matterhorn');
 
 var Feature = require('./Feature')
 var FilterView = require('./FilterView')
@@ -32,7 +31,7 @@ class ProjectView extends Component {
     };
     var features = [];
     for(var feature of this.props.route.passProps.features) {
-      feature.tickets = this.props.route.passProps.tickets
+      feature.tickets = this.props.route.passProps.store.tickets
         .filter(ticket =>
           ticket.feature_id == feature.id)
 
@@ -40,7 +39,6 @@ class ProjectView extends Component {
     }
     // this.state.features = this.state.features.cloneWithRows(features)
     this.state.unFilteredFeatures = JSON.parse(JSON.stringify(features));
-    console.log(Store.projects);
   }
 
   componentWillMount() {
@@ -71,9 +69,7 @@ class ProjectView extends Component {
 
   render() {
     var Sidebar = require('./Sidebar');
-    var menu = <Sidebar projects={this.props.route.passProps.projects}
-                        features={this.props.route.passProps.features}
-                        tickets={this.props.route.passProps.tickets}
+    var menu = <Sidebar store={this.props.route.passProps.store}
                         navigator={this.props.navigator}></Sidebar>
     return (
       <SideMenu menu={menu}

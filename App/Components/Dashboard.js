@@ -47,9 +47,7 @@ class Dashboard extends React.Component {
       return this.renderLoadingView();
     }
 
-    var menu = <Sidebar projects={this.state.store.projects}
-                        features={this.state.store.features}
-                        tickets={this.state.store.tickets}
+    var menu = <Sidebar store={this.state.store}
                         navigator={this.props.navigator}></Sidebar>
     return (
       <SideMenu menu={menu}
@@ -102,7 +100,7 @@ class Dashboard extends React.Component {
           features:responseData.features,
           tickets:responseData.tickets,
         });
-        
+
         this.setState({
           store: tempStore,
           loaded: true,
